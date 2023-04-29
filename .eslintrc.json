@@ -1,0 +1,10 @@
+{
+  "root": true,
+  "extends": ["next/core-web-vitals", "airbnb", "plugin:react/jsx-runtime", "prettier"],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx,", ".tsx"] }],
+    "react/jsx-props-no-spreading": ["error", {
+      "custom": "ignore"
+  }]
+  }
+}
