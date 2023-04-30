@@ -1,6 +1,10 @@
 {
   "root": true,
-  "extends": ["next/core-web-vitals", "airbnb", "plugin:react/jsx-runtime", "prettier"],
+  "ignorePatterns": ["next.config.js"],
+  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript", "plugin:react/jsx-runtime", "prettier"],
+  "parserOptions": {
+     "project": "./tsconfig.json"
+  },
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx,", ".tsx"] }],
     "react/jsx-props-no-spreading": ["error", {
