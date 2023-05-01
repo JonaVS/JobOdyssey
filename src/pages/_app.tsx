@@ -1,10 +1,13 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { MantineProvider } from "@mantine/core";
+import { ColorSchemeProvider, MantineProvider } from "@mantine/core";
+import useColorSchemeConfig from "@/hooks/useColorSchemeConfig";
 import Layout from "@/components/Layout/Layout";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const { colorScheme, toggleColorScheme } = useColorSchemeConfig();
+
   return (
     <>
       <Head>
@@ -16,11 +19,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MantineProvider withGlobalStyles withNormalizeCSS>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </MantineProvider>
+      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+        <MantineProvider theme={{colorScheme}} withGlobalStyles withNormalizeCSS>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </MantineProvider>
+      </ColorSchemeProvider>
     </>
   );
 }
