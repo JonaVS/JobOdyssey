@@ -1,32 +1,23 @@
-import {
-  Burger,
-  Header,
-  MediaQuery,
-  Text,
-  useMantineTheme,
-} from "@mantine/core";
+import { Burger, Header, Text } from "@mantine/core";
+import useStyles from "./AppShellHeader.styles";
 
 type Props = {
-  showMenu: () => void
+  showMenu: () => void;
   opened: boolean;
 };
 
 function AppShellHeader({ showMenu, opened }: Props) {
-
-  const theme = useMantineTheme();
+  const { classes } = useStyles();
 
   return (
     <Header height={{ base: 50, md: 70 }} p="md">
-      <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
-        <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-          <Burger
-            opened={opened}
-            onClick={showMenu}
-            size="sm"
-            color={theme.colors.gray[6]}
-            mr="xl"
-          />
-        </MediaQuery>
+      <div className={classes.innerWrapper}>
+        <Burger
+          className={classes.burgerButton}
+          opened={opened}
+          onClick={showMenu}
+          size="sm"
+        />
         <Text fw="bolder">Brand</Text>
       </div>
     </Header>
