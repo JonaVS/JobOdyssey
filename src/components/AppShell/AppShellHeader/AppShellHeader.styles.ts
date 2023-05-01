@@ -5,6 +5,7 @@ const useStyles = createStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     height: "100%",
+    justifyContent: "space-between"
   },
 
   burgerButton: {

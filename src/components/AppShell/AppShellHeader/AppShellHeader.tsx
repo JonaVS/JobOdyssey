@@ -1,5 +1,6 @@
 import { Burger, Header, Text } from "@mantine/core";
 import useStyles from "./AppShellHeader.styles";
+import ColorSchemeToggler from "@/components/ColorSchemeToggler/ColorSchemeToggler";
 
 type Props = {
   showMenu: () => void;
@@ -19,6 +20,7 @@ function AppShellHeader({ showMenu, opened }: Props) {
           size="sm"
         />
         <Text fw="bolder">Brand</Text>
+        <ColorSchemeToggler/>
       </div>
     </Header>
   );
