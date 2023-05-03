@@ -11,4 +11,4 @@ export type AuthResponse = Omit<AuthBaseFields, "displayName"> & {
   token: string;
 };
 
-export type LoginRequest = Omit<AuthBaseFields, "displayName"> & RegisterRequest;
+export type LoginRequest = Pick<AuthBaseFields, "email"> & Pick<RegisterRequest, "password">;
