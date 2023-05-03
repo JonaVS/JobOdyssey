@@ -5,7 +5,7 @@ const useStyles = createStyles((theme) => ({
     background:
       theme.colorScheme === "dark"
         ? theme.colors.dark[8]
-        : theme.colors.gray[2],
+        : theme.colors.gray[0],
   },
 }));
 
