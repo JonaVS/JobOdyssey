@@ -25,6 +25,14 @@ const useStyles = createStyles((theme) => ({
   tab: {
     width: "50%",
   },
+
+  logo: {
+    width: 120,
+    height: "auto",
+    display: "block",
+    margin: "0px auto 30px auto"
+  }
+
 }));
 
 export default useStyles;
