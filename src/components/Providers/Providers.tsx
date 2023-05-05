@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 import { ColorSchemeProvider, MantineProvider } from "@mantine/core";
+import { Provider as ReduxStoreProvider } from "react-redux";
+import store from "@/store/store";
 import useColorSchemeConfig from "@/hooks/useColorSchemeConfig";
 
 type Props = {
@@ -19,7 +21,7 @@ function Providers({ children }: Props) {
         withGlobalStyles
         withNormalizeCSS
       >
-        {children}
+        <ReduxStoreProvider store={store}>{children}</ReduxStoreProvider>
       </MantineProvider>
     </ColorSchemeProvider>
   );
