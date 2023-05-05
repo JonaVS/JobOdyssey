@@ -3,7 +3,7 @@ import { Center, Tabs, Title } from "@mantine/core";
 import AuthForm from "../AuthForm/AuthForm";
 import useStyles from "./AuthPanel.styles";
 
-const tabs = [{ value: "Login" }, { value: "Register" }];
+const tabs = [{id: 1, value: "Login" }, {id: 2, value: "Register" }];
 
 function AuthPanel() {
   const { classes } = useStyles();
@@ -19,7 +19,7 @@ function AuthPanel() {
         <Title className={classes.title}>Job Odyssey</Title>
         <Tabs.List className={classes.tabList}>
           {tabs.map((tab) => (
-            <Tabs.Tab className={classes.tab} value={tab.value}>
+            <Tabs.Tab key={tab.id} className={classes.tab} value={tab.value}>
               {tab.value}
             </Tabs.Tab>
           ))}
