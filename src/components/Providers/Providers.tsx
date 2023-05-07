@@ -12,18 +12,20 @@ function Providers({ children }: Props) {
   const { colorScheme, toggleColorScheme } = useColorSchemeConfig();
 
   return (
-    <ColorSchemeProvider
-      colorScheme={colorScheme}
-      toggleColorScheme={toggleColorScheme}
-    >
-      <MantineProvider
-        theme={{ colorScheme }}
-        withGlobalStyles
-        withNormalizeCSS
+    <ReduxStoreProvider store={store}>
+      <ColorSchemeProvider
+        colorScheme={colorScheme}
+        toggleColorScheme={toggleColorScheme}
       >
-        <ReduxStoreProvider store={store}>{children}</ReduxStoreProvider>
-      </MantineProvider>
-    </ColorSchemeProvider>
+        <MantineProvider
+          theme={{ colorScheme }}
+          withGlobalStyles
+          withNormalizeCSS
+        >
+          {children}
+        </MantineProvider>
+      </ColorSchemeProvider>
+    </ReduxStoreProvider>
   );
 }
 
