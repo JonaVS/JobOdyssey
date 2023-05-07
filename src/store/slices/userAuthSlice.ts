@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { RootState } from "../store";
 import { RegisterRequest, User } from "@/models/auth/authModels";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import apiAgent from "@/api/agent";
 import { getApiError } from "@/utils/apiErrorExtractor";
+import type { RootState } from "../store";
 
 type UserAuthState = {
   user: User | null;
