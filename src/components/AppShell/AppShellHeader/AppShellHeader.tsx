@@ -1,3 +1,5 @@
+import { useAppSelector } from "@/hooks/reduxHooks";
+import { selectUser } from "@/store/slices/userAuthSlice";
 import { Burger, Header } from "@mantine/core";
 import Image from "next/image";
 import { useMediaQuery } from "@mantine/hooks";
@@ -13,6 +15,7 @@ type Props = {
 
 function AppShellHeader({ showMenu, opened }: Props) {
   const { classes } = useStyles();
+  const user = useAppSelector(selectUser);
   const isMobileView = useMediaQuery("(max-width: 768px)");
   const router = useRouter();
   const isMobileAuthPage = router.pathname.startsWith("/auth") && isMobileView;
@@ -20,12 +23,12 @@ function AppShellHeader({ showMenu, opened }: Props) {
   return (
     <Header height={{ base: 50, md: 70 }} p="md">
       <div className={classes.innerWrapper}>
-        <Burger
+        {user && <Burger
           className={classes.burgerButton}
           opened={opened}
           onClick={showMenu}
           size="sm"
-        />
+        />}
         <Image
           src={logo}
           alt="Job app logo"
