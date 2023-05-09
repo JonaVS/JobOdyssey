@@ -20,12 +20,17 @@ function createUserFromResponse(response: AuthResponse ): User {
   };
 }
 
+function storeJWT(token: string): void {
+  localStorage.setItem("jwt", token);
+}
+
 export const register = createAsyncThunk(
   "userAuth/register",
   async (registerData: RegisterRequest, {rejectWithValue}) => {
     try {
       const response = await apiAgent.auth.register(registerData);
       const user = createUserFromResponse(response);
+      storeJWT(response.token)
       return user;
     } catch (error) {
       return rejectWithValue(getApiError(error));
@@ -39,6 +44,7 @@ export const login = createAsyncThunk(
     try {
       const response = await apiAgent.auth.login(loginData);
       const user = createUserFromResponse(response);
+      storeJWT(response.token)
       return user;
     } catch (error) {
       return rejectWithValue(getApiError(error));
