@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { RegisterRequest, User } from "@/models/auth/authModels";
+import { AuthResponse, LoginRequest, RegisterRequest, User } from "@/models/auth/authModels";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import apiAgent from "@/api/agent";
 import { getApiError } from "@/utils/apiErrorExtractor";
@@ -13,15 +13,32 @@ const initialState: UserAuthState = {
   user: null,
 };
 
+function createUserFromResponse(response: AuthResponse ): User {
+  return {
+    displayName: response.displayName,
+    email: response.email,
+  };
+}
+
 export const register = createAsyncThunk(
   "userAuth/register",
   async (registerData: RegisterRequest, {rejectWithValue}) => {
     try {
       const response = await apiAgent.auth.register(registerData);
-      const user: User = {
-        displayName: response.displayName,
-        email: response.email,
-      };
+      const user = createUserFromResponse(response);
+      return user;
+    } catch (error) {
+      return rejectWithValue(getApiError(error));
+    }
+  }
+);
+
+export const login = createAsyncThunk(
+  "userAuth/login",
+  async (loginData: LoginRequest, {rejectWithValue}) => {
+    try {
+      const response = await apiAgent.auth.login(loginData);
+      const user = createUserFromResponse(response);
       return user;
     } catch (error) {
       return rejectWithValue(getApiError(error));
