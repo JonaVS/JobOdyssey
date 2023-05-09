@@ -9,10 +9,10 @@ type Props = {
 function AuthForm({ isLogin }: Props) {
   const iconSize = "1rem";
 
-  const { form } = useAuthForm(isLogin)
+  const { form, handleAuthForm } = useAuthForm(isLogin)
   
   return (
-    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+    <form onSubmit={form.onSubmit(handleAuthForm)}>
       {!isLogin && (
         <TextInput
           icon={<IconUser size={iconSize} />}
