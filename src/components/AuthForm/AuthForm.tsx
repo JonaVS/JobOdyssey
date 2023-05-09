@@ -9,7 +9,7 @@ type Props = {
 function AuthForm({ isLogin }: Props) {
   const iconSize = "1rem";
 
-  const { form, handleAuthForm } = useAuthForm(isLogin)
+  const { form, handleAuthForm, isSubmitting } = useAuthForm(isLogin);
   
   return (
     <form onSubmit={form.onSubmit(handleAuthForm)}>
@@ -41,7 +41,13 @@ function AuthForm({ isLogin }: Props) {
           {...form.getInputProps("confirmPassword")}
         />
       )}
-      <Button type="submit" color="indigo" fullWidth mt={20}>
+      <Button
+        type="submit"
+        color="indigo"
+        fullWidth
+        mt={20}
+        loading={isSubmitting}
+      >
         {isLogin ? "Login" : "Register"}
       </Button>
     </form>
