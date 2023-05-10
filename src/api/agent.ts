@@ -1,8 +1,13 @@
 import axios, { AxiosResponse } from "axios";
-import { RegisterRequest, AuthResponse, LoginRequest } from "@/models/auth/authModels";
+import { RegisterRequest, AuthResponse, LoginRequest, User } from "@/models/auth/authModels";
 
 const response = <T>(res: AxiosResponse<T>) => res.data;
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
+axios.defaults.withCredentials = true;
+if (typeof window !== "undefined")
+  axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
+    "jwt"
+  )}`;
 
 /*  
     -----DEV MODE ONLY CODE START-----
@@ -25,6 +30,7 @@ if (process.env.NODE_ENV === "development") {
 const auth = {
   register: (body: RegisterRequest) => axios.post<AuthResponse>("/auth/register", body).then(response),
   login: (body: LoginRequest) => axios.post<AuthResponse>("/auth/login", body).then(response),
+  isAuthenticated: () => axios.get<User>("/auth/is-authenticated").then(response),
 };
 
 const apiAgent = {
