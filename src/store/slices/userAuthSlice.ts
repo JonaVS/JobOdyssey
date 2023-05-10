@@ -52,6 +52,18 @@ export const login = createAsyncThunk(
   }
 );
 
+export const isAuthenticated = createAsyncThunk(
+  "userAuth/isAuthenticated",
+  async (_, { rejectWithValue }) => {
+    try {
+      const user = await apiAgent.auth.isAuthenticated();
+      return user;
+    } catch (error) {
+      return rejectWithValue(getApiError(error));
+    }
+  }
+);
+
 export const userAuthSlice = createSlice({
   name: "userAuth",
   initialState,
@@ -61,6 +73,9 @@ export const userAuthSlice = createSlice({
       state.user = action.payload as User;
     });
     builder.addCase(login.fulfilled, (state, action) => {
+      state.user = action.payload as User;
+    });
+    builder.addCase(isAuthenticated.fulfilled, (state, action) => {
       state.user = action.payload as User;
     });
   },
