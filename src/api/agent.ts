@@ -2,12 +2,25 @@ import axios, { AxiosResponse } from "axios";
 import { RegisterRequest, AuthResponse, LoginRequest, User } from "@/models/auth/authModels";
 
 const response = <T>(res: AxiosResponse<T>) => res.data;
+
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
 axios.defaults.withCredentials = true;
-if (typeof window !== "undefined")
-  axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
-    "jwt"
-  )}`;
+
+/*
+    -----AUTH HEADER ATTACHER-----
+*/
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      // eslint-disable-next-line no-param-reassign
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 
 /*  
     -----DEV MODE ONLY CODE START-----
