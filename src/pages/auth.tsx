@@ -14,7 +14,7 @@ export default function Auth() {
     if (user) {
       router.push("/");
     }
-  }, []);
+  }, [user]);
 
   if (user) return null;
 
