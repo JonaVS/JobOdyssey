@@ -24,6 +24,10 @@ function storeJWT(token: string): void {
   localStorage.setItem("jwt", token);
 }
 
+function removeJWT(): void {
+  localStorage.removeItem("jwt");
+}
+
 export const register = createAsyncThunk(
   "userAuth/register",
   async (registerData: RegisterRequest, {rejectWithValue}) => {
@@ -64,6 +68,22 @@ export const isAuthenticated = createAsyncThunk(
   }
 );
 
+// This is needed to revoke refresh token stored in http only cookie
+export const logout = createAsyncThunk(
+  "userAuth/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      await apiAgent.auth.logout();
+      return true;
+    } catch (error) {
+      return rejectWithValue(getApiError(error));
+    }finally {
+      // Even if API call fails, JWT from local storage needs to be removed.
+      removeJWT();
+    }
+  }
+);
+
 export const userAuthSlice = createSlice({
   name: "userAuth",
   initialState,
@@ -77,6 +97,13 @@ export const userAuthSlice = createSlice({
     });
     builder.addCase(isAuthenticated.fulfilled, (state, action) => {
       state.user = action.payload as User;
+    });
+    builder.addCase(logout.fulfilled, (state) => {
+      state.user = null;
+    });
+    // If logout API call fails, still set user to null 
+    builder.addCase(logout.rejected, (state) => {
+      state.user = null;
     });
   },
 });

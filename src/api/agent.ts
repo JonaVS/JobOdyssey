@@ -84,6 +84,7 @@ const auth = {
   register: (body: RegisterRequest) => axios.post<AuthResponse>("/auth/register", body).then(response),
   login: (body: LoginRequest) => axios.post<AuthResponse>("/auth/login", body).then(response),
   isAuthenticated: () => axios.get<User>("/auth/is-authenticated").then(response),
+  logout: () => axios.post("/auth/logout").then(response),
 };
 
 const apiAgent = {
