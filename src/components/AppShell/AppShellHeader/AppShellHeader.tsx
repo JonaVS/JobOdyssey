@@ -1,12 +1,13 @@
 import { useAppSelector } from "@/hooks/reduxHooks";
 import { selectUser } from "@/store/slices/userAuthSlice";
-import { Burger, Header } from "@mantine/core";
+import { Burger, Group, Header } from "@mantine/core";
 import Image from "next/image";
 import { useMediaQuery } from "@mantine/hooks";
 import { useRouter } from "next/router";
 import ColorSchemeToggler from "@/components/ColorSchemeToggler/ColorSchemeToggler";
-import useStyles from "./AppShellHeader.styles";
+import LogoutButton from "@/components/LogoutButton/LogoutButton";
 import logo from "../../../../public/logo.png";
+import useStyles from "./AppShellHeader.styles";
 
 type Props = {
   showMenu: () => void;
@@ -35,7 +36,10 @@ function AppShellHeader({ showMenu, opened }: Props) {
           width={100}
           style={{ display: isMobileAuthPage ? "none" : "block" }}
         />
-        <ColorSchemeToggler />
+        <Group>
+          {user && <LogoutButton/>}
+          <ColorSchemeToggler />
+        </Group>
       </div>
     </Header>
   );
