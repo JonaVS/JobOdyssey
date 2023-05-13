@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { Box, LoadingOverlay } from "@mantine/core";
 import useAuthStatus from "@/hooks/useAuthStatus";
+import FullPageLoader from "../FullPageLoader/FullPageLoader";
 import AppMainShell from "../AppShell/AppShell";
 
 type Props = {
@@ -11,11 +11,7 @@ function Layout({ children }: Props) {
   const { isLoading } = useAuthStatus();
 
   if (isLoading) {
-    return (
-      <Box h="100vh" pos="relative">
-        <LoadingOverlay loaderProps={{color: "red", variant: "dots"}} visible/>
-      </Box>
-    );
+    return <FullPageLoader />;
   }
 
   return <AppMainShell>{children}</AppMainShell>;
