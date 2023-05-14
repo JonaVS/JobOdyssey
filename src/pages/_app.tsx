@@ -1,4 +1,4 @@
-import "@/styles/globals.css";
+import GlobalStyles from "@/styles/Global";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Providers from "@/components/Providers/Providers";
@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Providers>
+        <GlobalStyles/>
         <Layout>
           <Notifications position="bottom-center" />
           <Component {...pageProps} />
