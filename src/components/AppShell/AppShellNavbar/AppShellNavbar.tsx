@@ -1,10 +1,15 @@
-import { Navbar, Text } from "@mantine/core";
+import JobBoardForm from "@/components/JobBoardForm/JobBoardForm";
+import { Button, Modal, Navbar, Title } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { IconSquarePlus } from "@tabler/icons-react";
 
 type Props = {
   hidden: boolean;
 };
 
 function AppShellNavbar({ hidden }: Props) {
+  const [opened, { open, close }] = useDisclosure(false);
+
   return (
     <Navbar
       p="md"
@@ -12,7 +17,20 @@ function AppShellNavbar({ hidden }: Props) {
       hidden={hidden}
       width={{ sm: 200, lg: 300 }}
     >
-      <Text>Job boards will go here</Text>
+      <Title mb={10} order={5}>
+        My job boards
+      </Title>
+      <Button
+        onClick={open}
+        color="violet"
+        mb={10}
+        leftIcon={<IconSquarePlus />}
+      >
+        New job board
+      </Button>
+      <Modal opened={opened} onClose={close} title="New job board" centered>
+        <JobBoardForm />
+      </Modal>
     </Navbar>
   );
 }
