@@ -2,6 +2,7 @@ import JobBoardForm from "@/components/JobBoardForm/JobBoardForm";
 import { Button, Modal, Navbar, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconSquarePlus } from "@tabler/icons-react";
+import JobBoardLinkList from "@/components/JobBoardLinkList/JobBoardLinkList";
 
 type Props = {
   hidden: boolean;
@@ -31,6 +32,7 @@ function AppShellNavbar({ hidden }: Props) {
       <Modal opened={opened} onClose={close} title="New job board" centered>
         <JobBoardForm />
       </Modal>
+      <JobBoardLinkList />
     </Navbar>
   );
 }
