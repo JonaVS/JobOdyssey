@@ -1,4 +1,4 @@
-import useBoardSelection from "@/components/JobBoardLinkList/useBoardSelection";
+import useBoardSelection from "./useBoardSelection";
 import useStyles from "./JobBoardLinkList.styles";
 import JobBoardLink from "./JobBoardLink/JobBoardLink";
 import useUserBoards from "./useUserBoards";
