@@ -3,10 +3,12 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconSquarePlus } from "@tabler/icons-react";
 import JobBoardForm from "../JobBoardForm/JobBoardForm";
 import JobBoardLinkList from "./JobBoardLinkList/JobBoardLinkList";
+import useUserBoards from "./useUserBoards";
 
 function JobBoardLinksPanel() {
   const [opened, { open, close }] = useDisclosure(false);
-  
+  const { userBoards } = useUserBoards();
+
   return (
     <Box w="100%">
       <Title mb={10} order={5}>
@@ -24,7 +26,7 @@ function JobBoardLinksPanel() {
       <Modal opened={opened} onClose={close} title="New job board" centered>
         <JobBoardForm />
       </Modal>
-      <JobBoardLinkList />
+      <JobBoardLinkList userBoards={userBoards} />
     </Box>
   );
 }

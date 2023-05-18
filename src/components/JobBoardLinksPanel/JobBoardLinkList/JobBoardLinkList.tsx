@@ -1,12 +1,15 @@
+import { JobBoard } from "@/models/jobBoard/jobBoardModels";
 import useBoardSelection from "./useBoardSelection";
 import useStyles from "./JobBoardLinkList.styles";
 import JobBoardLink from "./JobBoardLink/JobBoardLink";
-import useUserBoards from "./useUserBoards";
 
-function JobBoardLinkList() {
+type Props = {
+  userBoards: JobBoard[];
+};
+
+function JobBoardLinkList({ userBoards }: Props) {
   const { classes } = useStyles();
   const { selectedIndex, handleSelectionChange } = useBoardSelection(0);
-  const { userBoards } = useUserBoards();
 
   return (
     <ol className={classes.boardLinkList}>
