@@ -2,13 +2,16 @@ import { Box, Button, Modal, Title } from "@mantine/core";
 import { IconSquarePlus } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import useUserBoards from "./useUserBoards";
+import JobBoardLinksPanelSkeleton from "./JobBoardLinksPanelSkeleton/JobBoardLinksPanelSkeleton";
+import ActionRetry from "../ActionRetry/ActionRetry";
 import JobBoardForm from "../JobBoardForm/JobBoardForm";
 import JobBoardLinkList from "./JobBoardLinkList/JobBoardLinkList";
-import ActionRetry from "../ActionRetry/ActionRetry";
 
 function JobBoardLinksPanel() {
   const [opened, { open, close }] = useDisclosure(false);
   const { isLoading, userBoards, error, fetchUserBoards } = useUserBoards();
+
+  if (!error && isLoading) return <JobBoardLinksPanelSkeleton />
 
   if (error)
     return (
