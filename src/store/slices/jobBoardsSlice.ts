@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { JobBoard } from "@/models/jobBoard/jobBoardModels";
+import type { CreateJobBoard, JobBoard } from "@/models/jobBoard/jobBoardModels";
 import apiAgent from "@/api/agent";
 import { getApiError } from "@/utils/apiErrorExtractor";
 import type { RootState } from "../store";
@@ -27,6 +27,18 @@ export const getUserJobBoards = createAsyncThunk(
   }
 );
 
+export const createJobBoard = createAsyncThunk(
+  "jobBoards/create",
+  async (createData: CreateJobBoard, { rejectWithValue }) => {
+    try {
+      const jobBoard = await apiAgent.jobBoards.createBoard(createData);
+      return jobBoard;
+    } catch (error) {
+      return rejectWithValue(getApiError(error));
+    }
+  }
+);
+
 export const jobBoardsSlice = createSlice({
   name: "jobBoards",
   initialState,
@@ -34,6 +46,9 @@ export const jobBoardsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUserJobBoards.fulfilled, (state, action) => {
       state.boards = action.payload;
+    })
+    builder.addCase(createJobBoard.fulfilled, (state, action) => {
+      state.boards.push(action.payload);
     })
   },
 });

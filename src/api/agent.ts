@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { RegisterRequest, AuthResponse, LoginRequest, User } from "@/models/auth/authModels";
-import { JobBoard } from "@/models/jobBoard/jobBoardModels";
+import { CreateJobBoard, JobBoard } from "@/models/jobBoard/jobBoardModels";
 
 const response = <T>(res: AxiosResponse<T>) => res.data;
 let isRefreshingJwt: boolean = false;
@@ -89,7 +89,8 @@ const auth = {
 };
 
 const jobBoards = {
-  getUserBoards: () => axios.get<JobBoard[]>("/job-boards").then(response), 
+  getUserBoards: () => axios.get<JobBoard[]>("/job-boards").then(response),
+  createBoard: (body: CreateJobBoard) => axios.post<JobBoard>("/job-boards", body).then(response) 
 }
 
 const apiAgent = {
