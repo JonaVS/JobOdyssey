@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { login, register } from "@/store/slices/userAuthSlice";
 import { notifications } from "@mantine/notifications";
-import getNotificationProps, { NotificationType } from "@/utils/notificationProps";
+import { getNotificationProps, NotificationType } from "@/utils/notificationProps";
 import getValidationSchema from "./validationSchema";
 
 function useAuthForm(isLogin: boolean) {

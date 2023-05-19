@@ -29,10 +29,8 @@ const notificationProps: Notifications = {
   },
 };
 
-function getNotificationProps(type: NotificationType, message?: string) {
+export function getNotificationProps(type: NotificationType, message?: string) {
   const props = notificationProps[type];
   props.message = message;
   return props;
 }
-
-export default getNotificationProps;
