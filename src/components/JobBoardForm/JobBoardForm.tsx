@@ -1,13 +1,21 @@
 import { Button, TextInput } from "@mantine/core";
+import useJobBoardForm from "./useJobBoardForm";
 
-function JobBoardForm() {
+type Props = {
+  closeModalFn: () => void;
+}
+
+function JobBoardForm({ closeModalFn }: Props) {
+  const { form, handleJobBoardForm, isSubmitting } = useJobBoardForm(closeModalFn);
+
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={form.onSubmit(handleJobBoardForm)}>
       <TextInput
         placeholder="Space traveller job hunt"
         label="Board name"
+        {...form.getInputProps("name")}
       />
-      <Button mt={5} fullWidth type="submit" color="violet">
+      <Button loading={isSubmitting} mt={5} fullWidth type="submit" color="violet">
         Create
       </Button>
     </form>

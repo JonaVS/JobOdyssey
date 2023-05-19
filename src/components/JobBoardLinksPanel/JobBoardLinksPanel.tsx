@@ -37,7 +37,7 @@ function JobBoardLinksPanel() {
         New job board
       </Button>
       <Modal opened={opened} onClose={close} title="New job board" centered>
-        <JobBoardForm />
+        <JobBoardForm closeModalFn={close} />
       </Modal>
       <JobBoardLinkList userBoards={userBoards} />
     </Box>
